@@ -1,0 +1,63 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+// Narrow Parking Garage - LIFO Implementation using Stack
+int main() {
+    stack<string> garage; // Stack to store car numbers
+    int choice;
+    string carNo;
+
+    cout << "--- Narrow Parking Garage System (Stack - LIFO) ---" << endl;
+
+    do {
+        cout << "\n1. Car Enter (Push)\n";
+        cout << "2. Car Leave (Pop)\n";
+        cout << "3. Display Parked Cars\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter Car Number to Park: ";
+                cin >> carNo;
+                garage.push(carNo);
+                cout << "Car " << carNo << " parked successfully." << endl;
+                break;
+
+            case 2:
+                if (garage.empty()) {
+                    cout << "Garage is EMPTY! No cars to leave." << endl;
+                } else {
+                    cout << "Car " << garage.top() << " left the garage." << endl;
+                    garage.pop();
+                }
+                break;
+
+            case 3:
+                if (garage.empty()) {
+                    cout << "Garage is EMPTY." << endl;
+                } else {
+                    // To display, we need a temp stack
+                    stack<string> temp = garage;
+                    cout << "\nCars in Garage (Top to Bottom - Last Entered is on Top):\n";
+                    while (!temp.empty()) {
+                        cout << temp.top() << endl;
+                        temp.pop();
+                    }
+                }
+                break;
+
+            case 4:
+                cout << "Exiting..." << endl;
+                break;
+
+            default:
+                cout << "Invalid Choice!" << endl;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
